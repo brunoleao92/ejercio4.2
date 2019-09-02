@@ -1,62 +1,60 @@
+//Realizar una funcion que reciba la cantidad de numeros a pedir,
+//la funcion los pida por teclado, obtenga el minimo y maximo
+/ /ingresado y los informe.
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int calcularMaxMin(int cantPedidos, int* min, int* max);
-
+int calcularMinMax(int cantPedidos,int* min,int* max);
 
 int main()
-{   int cantPedidos;
-    int max,min;
-    printf("Ingrese la cantidad de numeros que va a ingresar:");
-    scanf("%d", &cantPedidos);
-    fflush(stdin);
+{
+int minimo;
+int maximo;
+int pedidos;
+int res;
 
 
+    printf("\nCantidad de numeros a pedir");
+    scanf("%d", &pedidos);
+    if((res = calcularMinMax(pedidos, &minimo, &maximo))==0)
+    {
+        printf("minimo = %d ", minimo);
+        printf("maximo = %d ", maximo);
+    }else
+        {
+            printf("Error. No se pudo buscar minimo y maximo");
+        }
 
-    calcularMaxMin(cantPedidos,&min,&max);
     return 0;
 }
-
-int calcularMaxMin(int cantPedidos, int* min, int* max)
+int calcularMinMax(int cantPedidos,int* min,int* max)
 {
-    int i,valorMin,valorMax;
+    int i;
+    int num;
+    int valorMin;
+    int valorMax;
     int flag=0;
-    valorMax= *max;
-    valorMin= *min;
+    valorMin = *min;
+    valorMax = *max;
 
-
-    for(i=0;i<cantPedidos;i++)
+    for(i=0;i<cantPedidos; i++)
     {
-
-        int numero;
-
-        printf("Ingrese un numero:");
-        scanf("%d", &numero);
-        fflush(stdin);
-
-        if(numero<valorMin || flag==0)
+        printf("\nIngrese un numero ");
+        scanf("%d", &num);
+        if(flag==0 || num<valorMin)
         {
-            valorMin=numero;
+            valorMin=num;
         }
-
-
-        if(numero>valorMax || flag==0)
+        if (flag==0 || num>valorMax)
         {
-            valorMax=numero;
-            flag=1;
-
+            valorMax=num;
+            flag = 1;
         }
-
-
-
-
-
     }
 
-    return printf("\nEl numero minimo es:%d y el numero maximo es :%d \n", valorMin, valorMax);
+    *min = valorMin;
+    *max = valorMax;
+
+ return 0;
 }
-
-
-
-
-
